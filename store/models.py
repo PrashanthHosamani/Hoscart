@@ -14,10 +14,6 @@ class Product(models.Model):
     created_date = models.DateTimeField(auto_now_add = True)
     updated_date = models.DateTimeField(auto_now = True)
     
-    def get_product(self):
-        return reverse('product_detail', args = [self.category.slug, self.slug])
-        
-    
     def __str__(self):
         return self.products_name
     
