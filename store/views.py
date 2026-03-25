@@ -37,6 +37,7 @@ from rest_framework import viewsets, filters
 from . serializers import ProductSerializer
 from . models import Product
 from django_filters.rest_framework import DjangoFilterBackend
+from . pagination import ProductPagination
 
 class ProductViewset(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
@@ -44,3 +45,4 @@ class ProductViewset(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter, DjangoFilterBackend]
     search_fields = ['product_name']
     filterset_fields = ['category', 'price']
+    pagination_class = ProductPagination
