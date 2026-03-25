@@ -33,10 +33,14 @@
 #     return render(request, 'store/product_detail.html', context)
     
 
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from . serializers import ProductSerializer
 from . models import Product
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProductViewset(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related('category')
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    search_fields = ['product_name']
+    filterset_fields = ['category', 'price']

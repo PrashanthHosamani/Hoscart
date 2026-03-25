@@ -8,7 +8,6 @@ class Product(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to="photos/products")
     stock = models.IntegerField()
-    is_available = models.BooleanField(default = True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add = True)
     updated_date = models.DateTimeField(auto_now = True)
@@ -16,6 +15,8 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
     
-
+    @property
+    def is_available(self):
+        return self.stock > 0
     
     
