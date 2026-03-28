@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "cart",
     "rest_framework",
     "django_filters",
+    
 ]
 
 MIDDLEWARE = [
@@ -135,4 +136,29 @@ MEDIA_ROOT = BASE_DIR /'media'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
+    "AUTH_HEADER_TYPES": ('Bearer',),
+    "REFRESH_TOKEN_LIFETIME" : timedelta(days=30),
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated'
+    )
 }

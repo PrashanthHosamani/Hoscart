@@ -42,7 +42,12 @@ from . pagination import ProductPagination
 class ProductViewset(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.select_related('category')
-    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['product_name']
-    filterset_fields = ['category', 'price']
+    filterset_fields = {
+    'category': ['exact'],
+    'price': ['exact', 'gte', 'lte']
+}
     pagination_class = ProductPagination
+    ordering_fields = ['product_name', 'price']
+    ordering = ['id'] #default ordering
