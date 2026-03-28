@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Account
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth import authenticate
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,7 +26,5 @@ class Register(serializers.ModelSerializer):
         
         return user
         
-class Login(serializers.Serializer):
-    email = serializers.EmailField(required = True)
-    password = serializers.CharField(required = True, write_only = True)
-        
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'

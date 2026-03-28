@@ -1,9 +1,11 @@
 from rest_framework.generics import CreateAPIView
-from . serializers import Register, Login, UserSerializer
+from . serializers import Register, UserSerializer, MyTokenObtainPairSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 
 class Register(CreateAPIView):
@@ -26,3 +28,5 @@ class Register(CreateAPIView):
             'access_token' : str(access),
         }, status = status.HTTP_201_CREATED)
 
+class MyTokenObtainPairLogin(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
