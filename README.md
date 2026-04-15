@@ -207,6 +207,21 @@ Supports:
 git clone https://github.com/your-username/hoscart.git
 cd hoscart
 
-## 2. Create Virtual Environment
+2. Create Virtual Environment
 python -m venv env
 source env/bin/activate
+
+3. Install Dependencies
+pip install -r requirements.txt
+
+4. Configure Environment Variables
+SECRET_KEY=your_secret_key
+DEBUG=True
+DATABASE_URL=your_database_url
+
+5. Run Migrations
+python manage.py makemigrations
+python manage.py migrate
+
+6. Run Server
+python manage.py runserver
