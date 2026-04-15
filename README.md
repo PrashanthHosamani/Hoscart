@@ -89,3 +89,124 @@ The goal of Hoscart is to build a backend system that reflects how real e-commer
 ---
 
 # 🧠 System Architecture
+
+---
+
+# 📌 API Design
+
+The system follows RESTful API principles.
+
+---
+
+## 🔐 Authentication APIs
+
+| Method | Endpoint | Description |
+|-------|--------|------------|
+| POST | /api/register/ | Register user |
+| POST | /api/login/ | Login user |
+| POST | /api/token/refresh/ | Refresh JWT |
+
+---
+
+## 📦 Product APIs
+
+| Method | Endpoint | Description |
+|-------|--------|------------|
+| GET | /api/products/ | List products |
+| GET | /api/products/{id}/ | Product details |
+| POST | /api/products/ | Create product |
+| PUT | /api/products/{id}/ | Update product |
+| DELETE | /api/products/{id}/ | Delete product |
+
+Supports:
+- Filtering
+- Search
+- Pagination
+
+---
+
+## 🛒 Cart APIs
+
+| Method | Endpoint | Description |
+|-------|--------|------------|
+| GET | /api/cart/ | View cart |
+| POST | /api/cart/add/ | Add item |
+| PATCH | /api/cart/update/ | Update quantity |
+| DELETE | /api/cart/remove/ | Remove item |
+
+### Cart Logic
+
+- If product exists → update quantity  
+- If quantity > stock → reject  
+- If quantity = 0 → remove item  
+
+---
+
+## 📦 Order APIs
+
+| Method | Endpoint | Description |
+|-------|--------|------------|
+| POST | /api/orders/create/ | Create order |
+| GET | /api/orders/ | Order history |
+
+### Order Flow
+
+---
+
+# 🧠 Database Design
+
+### Key Relationships
+
+- User → Cart (One-to-One)
+- Cart → CartItems (One-to-Many)
+- Product → CartItems (Many-to-One)
+- Order → OrderItems (One-to-Many)
+
+---
+
+## Key Concepts Used
+
+- Normalization  
+- Controlled denormalization (Order price snapshot)  
+- Referential integrity  
+- Constraints (unique_together)  
+
+---
+
+# ⚡ Performance Optimization
+
+- Used `select_related` to avoid N+1 queries  
+- Implemented caching for frequently accessed data  
+- Pagination to handle large datasets  
+
+---
+
+# 🔒 Security
+
+- JWT-based authentication  
+- Protected endpoints  
+- Input validation  
+- User-specific data access  
+
+---
+
+# 🧪 Future Enhancements
+
+- Transaction handling (`atomic`)  
+- Rate limiting  
+- Logging & monitoring  
+- CI/CD pipelines  
+- Test coverage  
+
+---
+
+# ⚙️ Setup Instructions
+
+## 1. Clone Repository
+```bash
+git clone https://github.com/your-username/hoscart.git
+cd hoscart
+
+## 2. Create Virtual Environment
+python -m venv env
+source env/bin/activate
