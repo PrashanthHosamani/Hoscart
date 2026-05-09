@@ -77,7 +77,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     ordering = ['id']
 
     def list(self, request, *args, **kwargs):
-        # Cache key based on query params
         cache_key = str(request.query_params)
 
         # Check cache
@@ -88,7 +87,6 @@ class ProductViewSet(viewsets.ModelViewSet):
 
         print("CACHE MISS ❌")
 
-        # Normal queryset flow
         queryset = self.filter_queryset(self.get_queryset())
 
         page = self.paginate_queryset(queryset)
@@ -99,7 +97,6 @@ class ProductViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(queryset, many=True)
             data = serializer.data
 
-        # Store in cache
         lru_cache.put(cache_key, data)
 
         return Response(data)
