@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "cart",
     "rest_framework",
     "django_filters",
+    "order",
     
 ]
 

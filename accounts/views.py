@@ -6,8 +6,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
-
 class Register(CreateAPIView):
     permission_classes = (AllowAny,)
     serializer_class = Register

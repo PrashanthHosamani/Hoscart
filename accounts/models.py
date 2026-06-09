@@ -40,7 +40,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=100, unique=True)
+    username = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
     
     #required feilds becuase of custom user model 

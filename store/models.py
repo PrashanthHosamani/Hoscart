@@ -6,7 +6,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(max_length = 200, blank=True)
     price = models.IntegerField()
-    image = models.ImageField(upload_to="photos/products")
+    image = models.ImageField(upload_to="photos/products", blank = True)
     stock = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_date = models.DateTimeField(auto_now_add = True)

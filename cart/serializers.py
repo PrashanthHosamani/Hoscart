@@ -42,12 +42,12 @@ class AddToCartSerializer(serializers.Serializer):
         
         data["product"] = product
         return data
-    
+     
     def create(self, validated_data):
         request = self.context["request"]
         user = request.user
         
-        product = validated_data["product"]
+        product =validated_data["product"]
         quantity = validated_data["quantity"] 
         
         #get if the cart is already created or exist or create if not
@@ -73,10 +73,34 @@ class AddToCartSerializer(serializers.Serializer):
                 )
             
         return cart_item
+    
+class UpdateCartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['quantity']
+    
+    def validate_quantity(self, value):
+        product = self.instance.product
+
+        if value >= 0:
+            if value > product.stock:
+                raise serializers.ValidationError(f"Only {product.stock} items remaining in stock.")
+            
+            return value
+            
+        raise serializers.ValidationError("Invalid quantity")
+    
+    
+
+    
+    
+    
+        
+        
+        
             
             
             
             
     
-        
         
