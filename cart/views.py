@@ -12,6 +12,7 @@ class AddToCartView(APIView):
         
     def post(self, request):
         serializer = AddToCartSerializer(data = request.data, context = {'request' : request})
+        #serializer.is_valid(raise_exception=True)
         if serializer.is_valid():
             cart_item = serializer.save()
             item_serializer = CartItemSerializer(cart_item)

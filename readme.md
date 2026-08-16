@@ -622,19 +622,6 @@ Through Hoscart, I gained hands-on experience with:
 
 ---
 
-# 👨‍💻 Author
-
-**Prashanth Hosamani**
-
-Computer Science Engineering Student
-
-Backend Development | Python | Django | REST APIs | Databases | Cloud | AI Systems
-
-GitHub: https://github.com/your-github
-
-LinkedIn: https://linkedin.com/in/your-linkedin
-
----
 
 # ⭐ Final Note
 
